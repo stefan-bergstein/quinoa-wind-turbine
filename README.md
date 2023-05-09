@@ -256,8 +256,11 @@ Create Tekton pipeline manifests
 
 Change the GitOps repo to your fork:
 ```bash
-sed -i 's/rhdevelopers/yourquayuser/g' tekton/pipeline-cached.yaml
-sed -i 's/redhat-developer-demos/yourgithubuser/g' tekton/pipeline-cached.yaml
+MYQAYUSER=yourquayuser
+MYGITHUBUSER=yourgithubuser
+
+sed -i "s/rhdevelopers/${MYQAUYUSER}/g" tekton/pipeline-cached.yaml 
+sed -i "s/redhat-developer-demos/${MYGITHUBUSER}/g" tekton/pipeline-cached.yaml
 ```
 
 ```bash
@@ -276,8 +279,13 @@ oc apply -f tekton/el-route.yaml
 Update all references to quay.io with your repos for quinoa-wind-turbine references:
 
 ```bash
-sed -i 's/rhdevelopers/yourquayuser/g' k8s/deployment.yaml
-sed -i 's/redhat-developer-demos/yourgithubuser/g' argo/wind-turbine-app.yaml
+sed -i "s/rhdevelopers/${MYQAUYUSER}/g" k8s/deployment.yaml
+sed -i  "s/redhat-developer-demos/${MYGITHUBUSER}/g" argo/wind-turbine-app.yaml
+
+# Optionally, update the target namespace
+CURRENTNAMESPACE=$(oc project -q)
+sed -i "s|namespace:.*demo|namespace: $CURRENTNAMESPACE|" argo/wind-turbine-app.yaml
+
 git add .
 git commit  -m "update reference to quay and github"
 git push
