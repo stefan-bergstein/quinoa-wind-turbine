@@ -198,8 +198,10 @@ Install AMQ Streams from OperatorHub and create a KafkaCluster named `my-cluster
 
 #### Infinispan
 
-1. Create an infinispan cluster from the Web Console using the "Infinispan Helm chart"
-2. Name it `infinispan`
+1. Create an infinispan cluster from the OpenShift Developer Web Console using the "Infinispan Helm chart"
+2. `Add` -> `Developer Catalog` -> `Helm Chart`
+3. Find **Infinispan**  -> `Create` -> `Create`
+4. Name it `infinispan`
 
 ### Flow
 
